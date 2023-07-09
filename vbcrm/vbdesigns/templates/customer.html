@@ -1,0 +1,41 @@
+<!-- customer detail template  -->
+
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="col-md-6 offset-md-3">
+
+
+    <div class="card  ">
+        <div class="card-header text-center">
+            Customer Record
+        </div>
+        <div class="card-body">
+            <h5 class="card-title text-center">{{customer_record}}</h5>
+            <p class="card-text">
+            <ul class="list-group list-group-flush align-left">
+                <li class="list-group-item"></li>
+                <li class="list-group-item align-left"><strong>Customer ID: </strong>Customer ID:{{customer_record.id}}
+                </li>
+                <li class="list-group-item"><strong>Email: </strong>{{customer_record.email}}</li>
+                <li class="list-group-item"><strong>Phone: </strong>{{customer_record.phone}}</li>
+                <li class="list-group-item"><strong>Address: </strong>{{customer_record.address}}</li>
+                <li class="list-group-item"><strong>City: </strong>C{{customer_record.city}}</li>
+                <li class="list-group-item"><strong>Postcode: </strong>{{customer_record.postcode}}</li>
+
+            </ul>
+            </p>
+        </div>
+        <div class="card-footer text-body-secondary text-center">
+            {{customer_record.created_at}}
+        </div>
+    </div>
+    <br>
+    <a href="{% url 'home' %}" class="btn btn-secondary " tabindex="-1" role="button" aria-disabled="true">Back</a>
+    <a href="{% url 'delete_customer' customer_record.id %}" class="btn btn-danger " tabindex="-1" role="button"
+        aria-disabled="true">Delete</a>
+    <a href="{% url 'update_customer' customer_record.id %}" class="btn btn-secondary " tabindex="-1" role="button"
+        aria-disabled="true">Update</a>
+</div>
+
+{% endblock %}

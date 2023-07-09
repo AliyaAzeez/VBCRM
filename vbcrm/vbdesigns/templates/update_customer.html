@@ -1,0 +1,20 @@
+<!-- template for Updating customer details -->
+
+
+{% extends 'base.html' %}
+{% block content %}
+<div class="col-md-6 offset-md-3">
+    <h1>Update Customer</h1>
+    <br>
+    <form method="POST">
+        {% csrf_token %}
+
+
+        {{ form.as_p }}
+        <br />
+        <button type="submit" class="btn btn-secondary">Update Customer</button>
+        <a href="{% url 'home' %}" class="btn btn-secondary " tabindex="-1" role="button" aria-disabled="true">Back</a>
+
+</div>
+
+{% endblock %}

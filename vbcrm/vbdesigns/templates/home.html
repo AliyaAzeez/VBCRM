@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div>
+    <img src="{% static 'vbcrm/VBLogo1.jpg' %}" class="img-fluid" alt="logo">
+
+    {% if user.is_authenticated %}
+    <!-- if user is logged in list all the customers -->
+    <h1>VB Customers</h1>
+    <table class="table table-striped table-hover table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Address</th>
+                <th scope="col">City</th>
+                <th scope="col">State</th>
+                <th scope="col">Postcode</th>
+                <th scope="col">Created At</th>
+                <th scope="col">ID</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {% if customers %}
+            {% for customer in customers %}
+            <tr>
+                <td>{{ customer.first_name }} {{ customer.last_name }}</td>
+                <td>{{ customer.email }}</td>
+                <td>{{ customer.phone }}</td>
+                <td>{{ customer.address }}</td>
+                <td>{{ customer.city }}</td>
+                <td>{{ customer.state }}</td>
+                <td>{{ customer.postcode }}</td>
+                <td>{{ customer.created_at }}</td>
+                <td><a href="{% url 'customer' customer.id %}">{{ customer.id }}</a></td>
+            </tr>
+            {% endfor %}
+            <!-- if no customers in the db -->
+            {% else %}
+            <h3> There are no customers. Please start adding the customers in New Customer link </h3>
+            {% endif %}
+
+
+        </tbody>
+    </table>
+
+    {% else %}
+    <!-- if user is not logged in redirect to login page -->
+    <h1>Login</h1>
+    <br>
+    <form method="POST" action="{%url 'home' %}">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <input type="text" class="form-control" name="username" , placeholder="username" required>
+        </div>
+        <div class="mb-3">
+            <input type="password" class="form-control" name="password" , placeholder="password" required>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-secondary">Login</button>
+
+    </form>
+
+</div>
+
+{%endif%}
+
+{% endblock %}

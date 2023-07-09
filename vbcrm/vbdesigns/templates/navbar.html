@@ -1,0 +1,43 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <!-- logo -->
+        <a class="navbar-brand waves-effect" href="/">
+            <img src="{% static 'vbcrm/VBLogo1.jpg' %}" class="img-rounded" alt="VB Designs" style="width: 30px">
+        </a>
+        <!-- Title -->
+        <a class="navbar-brand" href="{% url 'home' %}">VB Designs</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- home -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+                </li>
+                <!-- add new customer link -->
+                {% if user.is_authenticated %}
+                <li class="nav-item ">
+                    <a class="nav-link" href="{% url 'add_customer' %}">New Customer</a>
+                </li>
+                <!-- logout -->
+                <li class="nav-item ">
+                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                </li>
+
+                {% else %}
+                <!-- if not authenticated login and signup link -->
+                <li class="nav-item ">
+                    <a class="nav-link" href="{% url 'home' %}">Login</a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="{% url 'signup' %}">Signup</a>
+                </li>
+                {%endif%}
+
+
+        </div>
+    </div>
+</nav>
